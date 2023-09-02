@@ -52,7 +52,7 @@ jobs:
     # Executa testes Django dentro do contêiner do serviço app.
     - name: Tests with coverage
       run: |
-        docker-compose exec -T app bash -c "source .venv/bin/activate && pytest -s -x --cov=blog -vv --ignore .venv --cov-report term-missing --cov-report xml --cov-report html"
+        docker-compose exec -T app bash -c "source .venv/bin/activate && pytest -s -x --cov=blog -vv --ignore=/home/python/app/.venv --cov-report term-missing --cov-report xml --cov-report html"
 
     # Encerra os serviços do Docker Compose.
     - name: Teardown
