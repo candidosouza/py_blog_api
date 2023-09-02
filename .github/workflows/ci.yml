@@ -26,8 +26,14 @@ jobs:
     # - name: Waiting environment to be ready
     #   run: docker-compose exec -T app bash -c "while ! nc -z db 5432; do sleep 1; done;"
 
+    - name: copy .env.example to .env
+      run: docker-compose exec -T app bash -c "cp .env.example .env"
+
+    - name: poetry virtualenvs in-project
+      run: docker-compose exec -T app bash -c "poetry config virtualenvs.in-project true"
+
     - name: install dependencies
-      run: poetry install
+      run: docker-compose exec -T app bash -c "poetry install"
     
     - name: Run tests
       run: python manage.py test
