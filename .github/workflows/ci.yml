@@ -8,8 +8,35 @@ on:
 
 jobs:
 
-  build:
+  tests:
+  
+    runs-on: ubuntu-latest
 
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Run Docker Compose (just to ensure services are up)
+      run: docker-compose up -d
+
+    - name: Install dependencies
+      run: docker-compose exec -T -u root app poetry install --no-interaction --no-ansi
+
+    - name: Activate virtual environment and run Django tests
+      run: |
+        docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test"
+
+    # - name: Run tests with coverage
+    #   run: |
+    #     docker-compose exec -T app bash -c "source .venv/bin/activate \
+    #     && pytest --ignore ./.venv --cov ./blog --cov-fail-under 80 --cov-report html:./__coverage"
+
+    - name: Teardown Docker Compose
+      if: always()
+      run: docker-compose down
+
+
+  build:
+    needs: tests
     runs-on: ubuntu-latest
 
     steps:
@@ -35,30 +62,3 @@ jobs:
 
     - name: Run Docker Compose
       run: docker-compose up -d
-
-  tests:
-
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Run Docker Compose (just to ensure services are up)
-      run: docker-compose up -d
-
-    - name: Install dependencies
-      run: docker-compose exec -T -u root app poetry install --no-interaction --no-ansi
-
-    - name: Activate virtual environment and run Django tests
-      run: |
-        docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test"
-
-    # - name: Run tests with coverage
-    #   run: |
-    #     docker-compose exec -T app bash -c "source .venv/bin/activate \
-    #     && pytest --ignore ./.venv --cov ./blog --cov-fail-under 80 --cov-report html:./__coverage"
-
-    - name: Teardown Docker Compose
-      if: always()
-      run: docker-compose down
