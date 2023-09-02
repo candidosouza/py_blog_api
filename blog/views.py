@@ -4,14 +4,14 @@ from rest_framework import filters, generics, viewsets
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from blog.models import Category, Post, UserProfile, Comment
+from blog.models import Category, Comment, Post
 from blog.serializers import (
     CategorySerializer,
+    CommentSerializer,
+    ListCommentsPostSerializer,
     ListPostCategorySerializer,
     ListPostsUserSerializer,
     PostSerializer,
-    CommentSerializer,
-    ListCommentsPostSerializer
 )
 
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from blog.models import Category, Post, UserProfile, Comment
+from blog.models import Category, Comment, Post, UserProfile
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -72,5 +72,3 @@ class ListPostCategorySerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         )
-
-

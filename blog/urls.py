@@ -3,11 +3,11 @@ from rest_framework import routers, serializers, viewsets
 
 from blog.views import (
     CategoryViewSet,
+    CommentViewSet,
+    ListCommentsPostViewSet,
     ListPostCategoryViewSet,
     ListPostsUserViewSet,
     PostViewSet,
-    CommentViewSet,
-    ListCommentsPostViewSet
 )
 
 router = routers.DefaultRouter()
@@ -31,5 +31,5 @@ urlpatterns = [
         'post/<int:pk>/comments/',
         ListCommentsPostViewSet.as_view(),
         name='list_comments_post',
-    )
+    ),
 ]

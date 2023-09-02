@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from faker import Faker
 
-from blog.models import Category, Post, UserProfile, Comment
+from blog.models import Category, Comment, Post, UserProfile
 
 User.objects.all().delete()
 UserProfile.objects.all().delete()
@@ -75,4 +75,3 @@ for _ in range(50):
         comment=fake.text(),
         approved=random.choice([True, False]),
     )
-

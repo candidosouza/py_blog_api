@@ -55,7 +55,7 @@ class UserProfile(models.Model):
         verbose_name_plural = 'Perfis dos Usuários'
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'Perfil: {self.user.first_name} {self.user.last_name}'
 
 
 class Category(models.Model):
@@ -83,8 +83,8 @@ class Category(models.Model):
     class Meta:
         ordering = ('created_at',)
         db_table = 'category'
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
 
 
 class Post(models.Model):
@@ -148,4 +148,4 @@ class Comment(models.Model):
         verbose_name_plural = 'Comentários'
 
     def __str__(self):
-        return f'Comentado por {self.nome} em {self.post}'
+        return f'Comentado por {self.name} em {self.post.title}'

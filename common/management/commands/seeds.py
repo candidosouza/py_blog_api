@@ -7,7 +7,9 @@ from blog.models import Category, Post, UserProfile
 class Command(BaseCommand):
     help = 'Seed database with initial data'
 
-    def handle(self, *args, **kwargs):  # sourcery skip: remove-unreachable-code
+    def handle(
+        self, *args, **kwargs
+    ):  # sourcery skip: remove-unreachable-code
         try:
             self.stdout.write('Deleting existing data...')
             # Limpa os dados existentes
