@@ -40,6 +40,10 @@ jobs:
     - name: Run Docker Compose
       run: docker-compose up -d
 
+    # Instala dependências via Poetry
+    - name: Install dependencies
+      run: docker-compose exec -T app poetry install --no-interaction --no-ansi
+  
     # Executa testes Django dentro do contêiner do serviço app.
     - name: Run Django Tests
       run: docker-compose exec -T app python manage.py test
