@@ -1,0 +1,33 @@
+name: Py Blog Api DRF CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+    - name: Up containers
+        run: docker-compose up -d
+
+    - name: Waiting environment to be ready
+        run: docker-compose exec -T app bash -c "while ! nc -z db 5432; do sleep 1; done;"
+
+    - name: install dependencies
+        run: poetry install
+    
+    - name: Run tests
+        run: python manage.py test
