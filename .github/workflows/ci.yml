@@ -42,7 +42,7 @@ jobs:
 
     # Executa testes Django dentro do contêiner do serviço app.
     - name: Run Django Tests
-      run: docker-compose exec app python manage.py test
+      run: docker-compose exec -T app python manage.py test
 
     # Encerra os serviços do Docker Compose.
     - name: Teardown
