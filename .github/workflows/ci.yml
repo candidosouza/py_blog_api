@@ -53,7 +53,7 @@ jobs:
     - name: Tests with coverage
       run: |
         docker-compose exec -T app bash -c "source .venv/bin/activate \
-        && pytest -s -x --cov=blog -vv --ignore=/home/python/app/.venv/* --cov-report term-missing --cov-report xml --cov-report html"
+        && pytest --ignore .venv --cov ./blog --cov-fail-under 80 --cov-report html:./__coverage"
 
     # Encerra os serviços do Docker Compose.
     - name: Teardown Docker Compose
