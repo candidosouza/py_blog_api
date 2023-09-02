@@ -1,13 +1,14 @@
 from unittest import TestCase
 
-from django.contrib.auth.models import User
+import pytest
 from django.utils.dateparse import parse_datetime
 from rest_framework.exceptions import ValidationError
 
-from blog.models import Category, Post
-from blog.serializers import CategorySerializer, PostSerializer
+from blog.models import Category
+from blog.serializers import CategorySerializer
 
 
+@pytest.mark.django_db
 class TestCategorySerializer(TestCase):
     def test_valid_serializer(self):
         category = Category(name='Tech', slug='tech')
