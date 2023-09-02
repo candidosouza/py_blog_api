@@ -1,17 +1,8 @@
-from unittest.mock import Mock
-
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
 
 from blog.admin import CategoryAdmin, CommentAdmin, PostAdmin, UserProfileAdmin
 from blog.models import Category, Comment, Post, UserProfile
-
-
-class MockRequest:
-    pass
-
-
-request = MockRequest()
 
 
 class UserProfileAdminTestCase(TestCase):

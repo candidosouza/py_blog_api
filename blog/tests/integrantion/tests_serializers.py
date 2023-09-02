@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from blog.models import Category, Comment, Post, UserProfile
+from blog.models import Category, Comment, Post
 from blog.serializers import (
     CategorySerializer,
     CommentSerializer,

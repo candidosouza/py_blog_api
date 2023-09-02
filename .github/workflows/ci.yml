@@ -47,7 +47,8 @@ jobs:
     # Executa testes Django dentro do contêiner do serviço app.
     - name: Activate virtual environment and run tests
       run: |
-        docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test"
+        docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test \
+        && pytest -s -x --cov=blog -vv --ignore .venv --cov-report term-missing --cov-report xml --cov-report html"
 
     # Encerra os serviços do Docker Compose.
     - name: Teardown

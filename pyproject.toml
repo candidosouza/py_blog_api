@@ -27,6 +27,7 @@ ruff = "^0.0.284"
 httpx = "^0.24.1"
 isort = "^5.12.0"
 pylint = "^2.17.5"
+pytest-django = "^4.5.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -44,7 +45,7 @@ line_length = 79
 
 #  pytest para reconhecer o caminho base para execução dos testes na raiz do projeto ./src:
 [tool.pytest.ini_options]
-pythonpath = "./"
+pythonpath = ".venv/bin/python"
 
 #  blue para excluir o caminho das migrações quando essas forem utilizadas:
 [tool.blue]
@@ -55,5 +56,6 @@ extend-exclude = '(migrations/)'
 lint = 'ruff . && blue --check . --diff'
 format = 'blue .  && isort .'
 pre_test = 'task lint'
-test = 'pytest -s -x --cov=src -vv'
+test = 'pytest -s -x --cov=blog -vv --ignore .venv'
+test01 = 'pytest -s -x --cov=blog -vv --ignore .venv --cov-report term-missing --cov-report xml --cov-report html'
 post_test = 'coverage html'
