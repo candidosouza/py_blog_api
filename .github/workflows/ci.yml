@@ -1,0 +1,55 @@
+name: Py Blog Api DRF CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    #Configura o Docker Buildx.
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    # Faz cache das camadas Docker para acelerar futuros builds.
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    #Constrói a imagem Docker (mas não a envia para um registro).
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        load: true  # importante para que a imagem fique disponível para testes abaixo
+        push: false  # definido como verdadeiro se você quiser enviar para o registro também
+
+    #Executa o Docker Compose para subir os serviços.
+    - name: Run Docker Compose
+      run: docker-compose up -d
+
+    # Instala dependências via Poetry
+    - name: Install dependencies
+      run: docker-compose exec -T -u root app poetry install --no-interaction --no-ansi
+  
+    # Executa testes Django dentro do contêiner do serviço app.
+    - name: Activate virtual environment and run tests
+      run: |
+        docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test"
+
+    # Encerra os serviços do Docker Compose.
+    - name: Teardown
+      if: always()
+      run: docker-compose down
