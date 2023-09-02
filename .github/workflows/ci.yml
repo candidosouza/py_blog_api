@@ -23,8 +23,8 @@ jobs:
     - name: Up containers
       run: docker-compose up -d
 
-    - name: Waiting environment to be ready
-      run: docker-compose exec -T app bash -c "while ! nc -z db 5432; do sleep 1; done;"
+    # - name: Waiting environment to be ready
+    #   run: docker-compose exec -T app bash -c "while ! nc -z db 5432; do sleep 1; done;"
 
     - name: install dependencies
       run: poetry install
