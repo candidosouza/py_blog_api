@@ -45,8 +45,9 @@ jobs:
       run: docker-compose exec -T -u root app poetry install --no-interaction --no-ansi
   
     # Executa testes Django dentro do contêiner do serviço app.
-    - name: Run Django Tests
-      run: docker-compose exec -T app python manage.py test
+    - name: Activate virtual environment and run tests
+      run: |
+        docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test"
 
     # Encerra os serviços do Docker Compose.
     - name: Teardown
