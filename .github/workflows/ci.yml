@@ -20,6 +20,8 @@ jobs:
       with:
         python-version: '3.11'
         cache: 'poetry'
+    - name: Copy .env.example to .env
+      run: cp .env.example .env
     - run: poetry install
     - run: poetry run pytest
 
