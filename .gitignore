@@ -1,4 +1,6 @@
 logs/
+.docker/pgdata/
+.docker/postgres/pgdata
 .ruff_cache/
 
 # Byte-compiled / optimized / DLL files
