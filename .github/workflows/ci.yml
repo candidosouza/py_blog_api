@@ -27,6 +27,9 @@ jobs:
     - name: Run Docker Compose (just to ensure services are up)
       run: docker-compose up -d
 
+    - name: Copy .env.example to .env
+      run: docker-compose exec -T -u root app cp .env.example .env
+
     - name: Install dependencies
       run: docker-compose exec -T -u root app poetry install --no-interaction --no-ansi
 
