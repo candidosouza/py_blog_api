@@ -10,6 +10,16 @@ jobs:
 
   tests:
     runs-on: 'ubuntu-latest'
+    # runs-on: ${{ matrix.os }}
+    # variáveis de ambiente
+    # env:
+    #   EXAMPLE: "examplo"
+    # strategy:
+    #   matrix:
+        # python-version: ['3.10', '3.11', '>=3.11']
+        # python-version: ['3.11']
+        # os: ['ubuntu-latest', 'ubuntu-20.04']
+        # os: ['ubuntu-latest']
 
     steps:
     - uses: actions/checkout@v3
@@ -31,6 +41,11 @@ jobs:
     - name: Activate virtual environment and run Django tests
       run: |
         docker-compose exec -T app bash -c "source .venv/bin/activate && python manage.py test"
+
+    # - name: Run tests with coverage
+    #   run: |
+    #     docker-compose exec -T app bash -c "source .venv/bin/activate \
+    #     && pytest --ignore ./.venv --cov ./blog --cov-fail-under 80 --cov-report html:./__coverage"
 
     - name: Teardown Docker Compose
       if: always()
@@ -60,3 +75,7 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: candidosouzza/py-blog-api-drf:${{ github.ref_name || 'latest' }}
+
+  # docker:
+  #   needs: build
+  #   uses: ./.github/workflows/new-file.yml
