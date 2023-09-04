@@ -25,7 +25,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/python/app
+            cd /home/${{ secrets.REMOTE_USER }}
             docker-compose down
             docker-compose up -d
             cp .env.example .env
