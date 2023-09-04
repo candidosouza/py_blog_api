@@ -19,7 +19,7 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Run Docker Compose (just to ensure services are up)
+    - name: Run Docker Compose
       run: docker-compose up -d
 
     - name: Copy .env.example to .env
@@ -59,4 +59,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: candidosouzza/py-blog-api-drf:${{ github.ref_name || 'latest' }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/py-blog-api-drf:latest
