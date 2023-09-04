@@ -1,0 +1,39 @@
+name: Py Blog Api DRF CD
+
+on: workflow_call
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: /home/python/app
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/python/app
+            docker-compose down
+            docker-compose up -d
+            cp .env.example .env
+            poetry config virtualenvs.in-project true
+            poetry install
+            mkdir -p /logs
+            chown -R python:python logs
+            poetry shell
+            .venv/bin/python manage.py migrate
+            .venv/bin/python manage.py seeds
+            .venv/bin/python manage.py manage.py runserver 0.0.0.0:8000
