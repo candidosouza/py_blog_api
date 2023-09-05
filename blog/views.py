@@ -9,6 +9,7 @@ from blog.serializers import (
     CategorySerializer,
     CommentSerializer,
     ListCommentsPostSerializer,
+    ListCommentsPostSerializerV2,
     ListPostCategorySerializer,
     ListPostsUserSerializer,
     PostSerializer,
@@ -65,7 +66,11 @@ class ListPostCategoryViewSet(generics.ListAPIView):
 
 
 class ListCommentsPostViewSet(generics.ListAPIView):
-    serializer_class = ListCommentsPostSerializer
+    
+    def get_serializer_class(self):
+        if self.request.version == '2':
+            return ListCommentsPostSerializerV2
+        return ListCommentsPostSerializer
 
     def get_queryset(self):
         post = Post.objects.get(pk=self.kwargs['pk'])

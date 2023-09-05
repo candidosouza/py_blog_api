@@ -55,6 +55,23 @@ class ListCommentsPostSerializer(serializers.ModelSerializer):
             'email',
             'comment',
             'approved',
+        )
+
+
+class ListCommentsPostSerializerV2(serializers.ModelSerializer):
+    post = serializers.SerializerMethodField()
+
+    def get_post(self, obj):
+        return obj.post.title
+
+    class Meta:
+        model = Comment
+        fields = (
+            'post',
+            'name',
+            'email',
+            'comment',
+            'approved',
             'created_at',
             'updated_at',
         )
