@@ -56,6 +56,11 @@ A autenticação é feita através de Basic Authentication. Você precisará de 
 - `DELETE /comments/{id}/`: Deletar um comentário
 - `GET /post/{id}/comments/`: Listar todos os comentários de um post específico
 
+### Endpoints da API (versão 2) QueryParameterVersioning
+#### Comentário
+- `GET /post/{id}/comments/?version=2`: Listar todos os comentários de um post específico
+
+
 ## Interface Admin
 
 O Django Admin está disponível para gerenciamento avançado dos modelos. Os modelos disponíveis incluem:
