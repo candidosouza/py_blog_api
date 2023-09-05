@@ -59,10 +59,10 @@
 			],
 			"settings": {
 				"python.pythonPath": "/home/python/app/.venv/bin/python",
+				"python.defaultInterpreterPath": "/home/python/app/.venv/bin/python",
 				"python.linting.enabled": true,
 				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
-				// "python.formatting.autopep8Path": "/home/python/.venv/bin/autopep8",
+				"python.linting.pylintEnabled": true
 			}
 		}
 	},

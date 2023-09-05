@@ -3,5 +3,19 @@
         "blog"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.pythonPath": "home/python/app.venv/bin/python",
+    "extensions": [
+        "ms-python.python",
+        "sourcery.sourcery",
+        "sonarsource.sonarlint-vscode",
+        "github.copilot",
+        "visualstudioexptteam.vscodeintellicode",
+        "eamodio.gitlens",
+        "vivaxy.vscode-conventional-commits",
+        "ms-azuretools.vscode-docker",
+        "be5invis.toml",
+        "humao.rest-client",
+        "ritwickdey.liveserver"
+    ],
 }
