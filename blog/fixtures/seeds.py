@@ -1,24 +1,21 @@
 import random
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, Permission, User
+from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
 from faker import Faker
 
 from blog.models import Category, Comment, Post, UserProfile
 
-User.objects.all().delete()
-UserProfile.objects.all().delete()
-Category.objects.all().delete()
-Post.objects.all().delete()
+# Iniciar Faker
+fake = Faker('pt_BR')
 
-# create superuser
+# 1. Criar superusuário
 User.objects.create_superuser(
     username='admin', email='admin@email.com', password='admin'
 )
 
-fake = Faker('pt_BR')
-
-# Cria usuários
+# 2. Criar usuários e seus perfis
 for _ in range(10):
     username = fake.user_name()
     email = fake.email()
@@ -43,14 +40,14 @@ for _ in range(10):
         github=fake.user_name(),
     )
 
-# Cria categorias
+# 3. Criar categorias
 for _ in range(5):
     name = fake.word()
     Category.objects.create(
         name=name, slug=name.lower(), is_active=random.choice([True, False])
     )
 
-# Cria posts
+# 4. Criar posts
 for _ in range(20):
     title = fake.sentence()
     user = random.choice(User.objects.filter(user_profile__type_user='E'))
@@ -65,7 +62,7 @@ for _ in range(20):
         published=random.choice([True, False]),
     )
 
-# Cria Comentários
+# 5. Criar comentários
 for _ in range(50):
     post = random.choice(Post.objects.all())
     Comment.objects.create(
@@ -75,3 +72,15 @@ for _ in range(50):
         comment=fake.text(),
         approved=random.choice([True, False]),
     )
+
+content_type = ContentType.objects.get_for_model(Post)
+post_permissions = Permission.objects.filter(content_type=content_type)
+filtered_permissions = [
+    p for p in post_permissions if p.codename != 'delete_post'
+]
+
+# for permission in filtered_permissions:
+#     print(permission.codename)
+
+for user in User.objects.filter(user_profile__type_user='E'):
+    user.user_permissions.add(*filtered_permissions)
