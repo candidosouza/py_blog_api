@@ -2,17 +2,25 @@ import random
 
 from django.contrib.auth.models import Group, Permission, User
 from django.contrib.contenttypes.models import ContentType
+from django.core.management import call_command
 from django.utils import timezone
 from faker import Faker
 
 from blog.models import Category, Comment, Post, UserProfile
+
+# Flush the database
+call_command('flush', interactive=False)
 
 # Iniciar Faker
 fake = Faker('pt_BR')
 
 # 1. Criar superusuário
 User.objects.create_superuser(
-    username='admin', email='admin@email.com', password='admin'
+    username='admin',
+    email='admin@email.com',
+    password='admin',
+    first_name='Admin',
+    last_name='Admin',
 )
 
 # 2. Criar usuários e seus perfis

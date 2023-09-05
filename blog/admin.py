@@ -17,6 +17,16 @@ admin.site.unregister(User)
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
     inlines = (UserProfileInline,)
+    list_display = ('name', 'email', 'is_staff', 'type_user_display')
+
+    def name(self, obj):
+        return f'{obj.first_name} {obj.last_name}'
+
+    def type_user_display(self, obj):
+        return obj.user_profile.get_type_user_display()
+
+    type_user_display.short_description = 'Tipo de Usuário'
+    name.short_description = 'Nome'
 
 
 @admin.register(Category)
