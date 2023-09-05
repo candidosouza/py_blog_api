@@ -66,7 +66,6 @@ class ListPostCategoryViewSet(generics.ListAPIView):
 
 
 class ListCommentsPostViewSet(generics.ListAPIView):
-    
     def get_serializer_class(self):
         if self.request.version == '2':
             return ListCommentsPostSerializerV2

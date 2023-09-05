@@ -1,28 +1,22 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+from django.contrib.auth.models import User
 
 from blog.models import Category, Comment, Post, UserProfile
 
 
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = (
-        'user',
-        'type_user',
-        'is_active',
-        'last_seen',
-        'created_at',
-        'updated_at',
-    )
-    list_filter = ('type_user', 'is_active', 'created_at', 'updated_at')
-    search_fields = (
-        'user__username',
-        'user__first_name',
-        'user__last_name',
-        'user__email',
-    )
-    date_hierarchy = 'created_at'
-    ordering = ('-created_at',)
-    list_per_page = 20
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
+    verbose_name_plural = 'user profiles'
+
+
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class UserAdmin(DefaultUserAdmin):
+    inlines = (UserProfileInline,)
 
 
 @admin.register(Category)

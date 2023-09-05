@@ -1,27 +1,8 @@
 from django.contrib.admin.sites import AdminSite
 from django.test import TestCase
 
-from blog.admin import CategoryAdmin, CommentAdmin, PostAdmin, UserProfileAdmin
-from blog.models import Category, Comment, Post, UserProfile
-
-
-class UserProfileAdminTestCase(TestCase):
-    def setUp(self):
-        self.site = AdminSite()
-        self.admin = UserProfileAdmin(UserProfile, self.site)
-
-    def test_list_display(self):
-        self.assertEqual(
-            list(self.admin.list_display),
-            [
-                'user',
-                'type_user',
-                'is_active',
-                'last_seen',
-                'created_at',
-                'updated_at',
-            ],
-        )
+from blog.admin import CategoryAdmin, CommentAdmin, PostAdmin
+from blog.models import Category, Comment, Post
 
 
 class CategoryAdminTestCase(TestCase):
