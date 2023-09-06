@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, generics, viewsets, status
+from rest_framework import filters, generics, status, viewsets
 from rest_framework.response import Response
 
 from blog.models import Category, Comment, Post

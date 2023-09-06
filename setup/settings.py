@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -163,6 +163,4 @@ REST_FRAMEWORK = {
 }
 
 # adicionar o endereço do frontend configuração do django cors headers
-CORS_ALLOWED_ORIGINS = [ 
-    "http://localhost:3000"
-]
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
