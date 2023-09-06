@@ -1,5 +1,5 @@
-import os
 import hashlib
+import os
 from datetime import datetime
 
 
@@ -8,6 +8,7 @@ def hashed_upload_to(directory):
     Gera um nome de arquivo baseado em um hash e retorna um caminho de upload
     para a imagem.
     """
+
     def upload_to(instance, filename):
         # Pega a extensão do arquivo (por exemplo, .jpg, .png)
         ext = os.path.splitext(filename)[1]
@@ -18,6 +19,6 @@ def hashed_upload_to(directory):
         hashed_filename = hashlib.sha256(input_str.encode('utf-8')).hexdigest()
 
         # Retorna o caminho para o arquivo
-        return os.path.join(directory, f"{hashed_filename}{ext}")
+        return os.path.join(directory, f'{hashed_filename}{ext}')
 
     return upload_to
