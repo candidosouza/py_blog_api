@@ -45,7 +45,7 @@ A autenticação é feita através de Basic Authentication. Você precisará de 
 
 ...
 
-### Categoria
+#### Categoria
 - `GET /categories/`: Listar todas as categorias
 - `POST /categories/`: Criar uma nova categoria
 - `PUT /categories/{id}/`: Atualizar uma categoria existente
