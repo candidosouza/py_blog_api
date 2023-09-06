@@ -164,3 +164,16 @@ REST_FRAMEWORK = {
 
 # adicionar o endereço do frontend configuração do django cors headers
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ['REDIS_URL'],
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
