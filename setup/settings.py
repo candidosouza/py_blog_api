@@ -10,16 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from pathlib import Path
 
 import dj_database_url
-from pathlib import Path
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
+dotenv_file = os.path.join(BASE_DIR, '.env')
 if os.path.isfile(dotenv_file):
     load_dotenv(dotenv_file)
 
@@ -30,7 +30,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ['DEBUG'] == "True" else False
+DEBUG = True if os.environ['DEBUG'] == 'True' else False
 
 ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'corsheaders',
     'common',
     'blog',
 ]
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -137,6 +139,27 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 15,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.DjangoModelPermissions',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    # restringir o acesso a API por requisições para usuários anônimos
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle',
+    # ],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '3/day'
+    # },
 }
+
+# adicionar o endereço do frontend configuração do django cors headers
+CORS_ALLOWED_ORIGINS = [ 
+    "http://localhost:3000"
+]

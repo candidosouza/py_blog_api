@@ -1,28 +1,32 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
+from django.contrib.auth.models import User
 
 from blog.models import Category, Comment, Post, UserProfile
 
 
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = (
-        'user',
-        'type_user',
-        'is_active',
-        'last_seen',
-        'created_at',
-        'updated_at',
-    )
-    list_filter = ('type_user', 'is_active', 'created_at', 'updated_at')
-    search_fields = (
-        'user__username',
-        'user__first_name',
-        'user__last_name',
-        'user__email',
-    )
-    date_hierarchy = 'created_at'
-    ordering = ('-created_at',)
-    list_per_page = 20
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
+    verbose_name_plural = 'user profiles'
+
+
+admin.site.unregister(User)
+
+
+@admin.register(User)
+class UserAdmin(DefaultUserAdmin):
+    inlines = (UserProfileInline,)
+    list_display = ('name', 'email', 'is_staff', 'type_user_display')
+
+    def name(self, obj):
+        return f'{obj.first_name} {obj.last_name}'
+
+    def type_user_display(self, obj):
+        return obj.user_profile.get_type_user_display()
+
+    type_user_display.short_description = 'Tipo de Usuário'
+    name.short_description = 'Nome'
 
 
 @admin.register(Category)

@@ -29,13 +29,6 @@ class AdminIntegrationTest(TestCase):
             comment='Great post!',
         )
 
-    def test_user_profile_admin_page(self):
-        response = self.client.get('/admin/blog/userprofile/')
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(
-            response, 'Selecione Perfil do Usuário para modificar'
-        )
-
     def test_category_admin_page(self):
         response = self.client.get('/admin/blog/category/')
         self.assertEqual(response.status_code, 200)
