@@ -30,6 +30,7 @@ class TestCategorySerializer(TestCase):
                 'id': category.id,
                 'name': 'Tech',
                 'slug': 'tech',
+                'image': None,
                 'is_active': True,
                 'created_at': category.created_at,
                 'updated_at': category.updated_at,

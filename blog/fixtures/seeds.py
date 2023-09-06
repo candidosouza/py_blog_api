@@ -64,6 +64,7 @@ for _ in range(20):
         user=user,
         title=title,
         slug=title.lower().replace(' ', '-'),
+        image=fake.image_url(),
         summary=fake.sentence(),
         content=fake.text(),
         category=category,

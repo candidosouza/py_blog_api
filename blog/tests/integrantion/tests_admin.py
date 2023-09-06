@@ -13,7 +13,7 @@ class AdminIntegrationTest(TestCase):
         self.profile = UserProfile.objects.create(
             user=self.admin_user, type_user='A'
         )
-        self.category = Category.objects.create(name='Tech', slug='tech')
+        self.category = Category.objects.create(name='Tech', slug='tech', image='')
         self.post = Post.objects.create(
             user=self.admin_user,
             title='Test Post',

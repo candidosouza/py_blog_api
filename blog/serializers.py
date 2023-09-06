@@ -32,6 +32,7 @@ class ListPostsUserSerializer(serializers.ModelSerializer):
         fields = (
             'title',
             'slug',
+            'image',
             'summary',
             'category',
             'published',
@@ -83,6 +84,7 @@ class ListPostCategorySerializer(serializers.ModelSerializer):
         fields = (
             'title',
             'slug',
+            'image',
             'summary',
             'category',
             'published',

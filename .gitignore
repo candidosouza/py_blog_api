@@ -2,6 +2,7 @@ logs/
 .docker/pgdata/
 .docker/postgres/pgdata
 .ruff_cache/
+media_root/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
