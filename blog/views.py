@@ -1,7 +1,10 @@
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import filters, generics, status, viewsets
 from rest_framework.response import Response
+
 
 from blog.models import Category, Comment, Post
 from blog.serializers import (
@@ -20,10 +23,11 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     http_method_names = ['get', 'post', 'put', 'patch']
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request):
         return create_with_location(self, request)
 
 
+@method_decorator(cache_page(30), name='dispatch') # 30 seconds de cache para desenvolvimento
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -37,8 +41,11 @@ class PostViewSet(viewsets.ModelViewSet):
     filterset_fields = ['category', 'published', 'user']
     http_method_names = ['get', 'post', 'put', 'patch']
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request):
         return create_with_location(self, request)
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(PostViewSet, self).dispatch(request, *args, **kwargs)
 
 
 class CommentViewSet(viewsets.ModelViewSet):

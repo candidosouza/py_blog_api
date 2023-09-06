@@ -80,3 +80,4 @@ O Django Admin está disponível para gerenciamento avançado dos modelos. Os mo
 - python-dotenv
 - dj-database-url
 - django-cors-headers
+- django-redis

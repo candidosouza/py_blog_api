@@ -13,6 +13,7 @@ services:
       - 8000:8000
     depends_on:
         - db
+        - redis
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
 
@@ -44,3 +45,11 @@ services:
       - db
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
+  
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - .docker/redis/data:/data

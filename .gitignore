@@ -1,6 +1,7 @@
 logs/
 .docker/pgdata/
 .docker/postgres/pgdata
+.docker/redis/data
 .ruff_cache/
 media_root/
 
