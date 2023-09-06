@@ -46,19 +46,19 @@ A autenticação é feita através de Basic Authentication. Você precisará de 
 - `POST /posts/`: Criar um novo post
 - `PUT /posts/{id}/`: Atualizar um post existente
 - `DELETE /posts/{id}/`: Deletar um post
-- `GET /user/{id}/posts/`: Listar todos os posts de um usuário específico
-- `GET /category/{id}/posts/`: Listar todos os posts de uma categoria específica
+- `GET /posts/user/{id}/`: Listar todos os posts de um usuário específico
+- `GET /categories/{id}/posts/`: Listar todos os posts de uma categoria específica
 
 #### Comentário
 - `GET /comments/`: Listar todos os comentários
 - `POST /comments/`: Criar um novo comentário
 - `PUT /comments/{id}/`: Atualizar um comentário existente
 - `DELETE /comments/{id}/`: Deletar um comentário
-- `GET /post/{id}/comments/`: Listar todos os comentários de um post específico
+- `GET /posts/{id}/comments/`: Listar todos os comentários de um post específico
 
 ### Endpoints da API (versão 2) QueryParameterVersioning
 #### Comentário
-- `GET /post/{id}/comments/?version=2`: Listar todos os comentários de um post específico
+- `GET /posts/{id}/comments/?version=2`: Listar todos os comentários de um post específico com a versão 2
 
 
 ## Interface Admin

@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics, viewsets
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
 
 from blog.models import Category, Comment, Post
 from blog.serializers import (
@@ -19,8 +17,6 @@ from blog.serializers import (
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
 
 
 class PostViewSet(viewsets.ModelViewSet):
