@@ -8,7 +8,7 @@ PyBlogAPI! Esta API REST com Django permite aos usuários gerenciar uma platafor
 ---
 
 ## Índice
-- [Configuração](#configuração)
+- [Configuração e Instalação](#configuração-e-instalação)
 - [Utilização](#utilização)
 - [Negociação de Conteúdo](#negociação-de-conteúdo)
 - [Autenticação](#autenticação)
@@ -19,7 +19,9 @@ PyBlogAPI! Esta API REST com Django permite aos usuários gerenciar uma platafor
 - [Interface Admin](#interface-admin)
 - [Dependências](#dependências)
 
-## Configuração
+## Configuração e Instalação
+
+Em Andamento...
 
 ...
 
@@ -81,6 +83,8 @@ O Django Admin está disponível para gerenciamento avançado dos modelos. Os mo
 
 ## Dependências
 - Docker
+
+### Bibliotecas Utilizadas
 - Django
 - Django Rest Framework
 - PyJWT
