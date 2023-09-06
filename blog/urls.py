@@ -18,7 +18,7 @@ router.register(r'comments', CommentViewSet, basename='Comment')
 urlpatterns = [
     path('', include(router.urls)),
     path(
-        'posts/user/<int:pk>',
+        'posts/user/<int:pk>/',
         ListPostsUserViewSet.as_view(),
         name='list_posts_user',
     ),
