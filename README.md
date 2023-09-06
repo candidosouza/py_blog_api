@@ -3,7 +3,7 @@
 # PyBlogAPI: Uma API RESTful de Blog com Django / Django Rest Framework
 
 ## Visão Geral
-Bem-vindo à documentação da PyBlogAPI! Esta API REST com Django permite aos usuários gerenciar uma plataforma de blog simples. O projeto foi construído com várias tecnologias, incluindo Docker, Django, Django Rest Framework e outras. Este documento descreve como começar com a configuração, o uso geral e abrange os endpoints disponíveis.
+PyBlogAPI! Esta API REST com Django permite aos usuários gerenciar uma plataforma de blog simples. O projeto foi construído com várias tecnologias, incluindo Docker, Django, Django Rest Framework e outras. Este documento descreve como começar com a configuração, o uso geral e abrange os endpoints disponíveis.
 
 ---
 
@@ -29,7 +29,7 @@ A API possui vários endpoints que permitem gerenciar categorias, posts e coment
 
 ## Negociação de Conteúdo
 
-A PyBlogAPI suporta negociação de conteúdo para responder com diferentes formatos de mídia de acordo com o que o cliente solicita. Atualmente, suportamos os formatos `JSON` e `XML`. Para especificar o formato desejado, use o cabeçalho `Accept` em sua solicitação:
+A PyBlogAPI suporta negociação de conteúdo para responder com diferentes formatos de mídia de acordo com o que o cliente solicita. Atualmente, suporta os formatos `JSON` e `XML`. Para especificar o formato desejado, use o cabeçalho `Accept` em sua solicitação:
 
 - Para `JSON`: `Accept: application/json`
 - Para `XML`: `Accept: application/xml`
@@ -37,6 +37,9 @@ A PyBlogAPI suporta negociação de conteúdo para responder com diferentes form
 ## Autenticação
 
 A autenticação é feita através de Basic Authentication. Você precisará de um nome de usuário e uma senha válidos para acessar os endpoints.
+
+- user: admin
+- password: admin
 
 ## Endpoints da API
 
