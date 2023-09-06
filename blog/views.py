@@ -17,6 +17,7 @@ from blog.serializers import (
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    http_method_names = ['get', 'post', 'put', 'patch']
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -30,6 +31,7 @@ class PostViewSet(viewsets.ModelViewSet):
     ordering_fields = ['title', 'created_at', 'updated_at']
     search_fields = ['title', 'summary', 'content']
     filterset_fields = ['category', 'published', 'user']
+    http_method_names = ['get', 'post', 'put', 'patch']
 
 
 class CommentViewSet(viewsets.ModelViewSet):
@@ -43,10 +45,12 @@ class CommentViewSet(viewsets.ModelViewSet):
     ordering_fields = ['created_at']
     search_fields = ['post', 'email', 'comment']
     filterset_fields = ['approved']
+    http_method_names = ['get', 'post', 'put', 'patch']
 
 
 class ListPostsUserViewSet(generics.ListAPIView):
     serializer_class = ListPostsUserSerializer
+    http_method_names = ['get']
 
     def get_queryset(self):
         user = User.objects.get(pk=self.kwargs['pk'])
@@ -55,6 +59,7 @@ class ListPostsUserViewSet(generics.ListAPIView):
 
 class ListPostCategoryViewSet(generics.ListAPIView):
     serializer_class = ListPostCategorySerializer
+    http_method_names = ['get']
 
     def get_queryset(self):
         category = Category.objects.get(pk=self.kwargs['pk'])
@@ -62,6 +67,8 @@ class ListPostCategoryViewSet(generics.ListAPIView):
 
 
 class ListCommentsPostViewSet(generics.ListAPIView):
+    http_method_names = ['get']
+    
     def get_serializer_class(self):
         if self.request.version == '2':
             return ListCommentsPostSerializerV2

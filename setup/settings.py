@@ -148,4 +148,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'PAGE_SIZE': 15,
+
+    # restringir o acesso a API por requisições para usuários anônimos
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle',
+    # ],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '3/day'
+    # },
 }
