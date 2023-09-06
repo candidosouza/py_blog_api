@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, generics, viewsets
+from rest_framework import filters, generics, viewsets, status
+from rest_framework.response import Response
 
 from blog.models import Category, Comment, Post
 from blog.serializers import (
@@ -19,6 +20,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     http_method_names = ['get', 'post', 'put', 'patch']
 
+    def create(self, request, *args, **kwargs):
+        return create_with_location(self, request)
+
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -33,6 +37,9 @@ class PostViewSet(viewsets.ModelViewSet):
     filterset_fields = ['category', 'published', 'user']
     http_method_names = ['get', 'post', 'put', 'patch']
 
+    def create(self, request, *args, **kwargs):
+        return create_with_location(self, request)
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
@@ -46,6 +53,9 @@ class CommentViewSet(viewsets.ModelViewSet):
     search_fields = ['post', 'email', 'comment']
     filterset_fields = ['approved']
     http_method_names = ['get', 'post', 'put', 'patch']
+
+    def create(self, request, *args, **kwargs):
+        return create_with_location(self, request)
 
 
 class ListPostsUserViewSet(generics.ListAPIView):
@@ -68,7 +78,7 @@ class ListPostCategoryViewSet(generics.ListAPIView):
 
 class ListCommentsPostViewSet(generics.ListAPIView):
     http_method_names = ['get']
-    
+
     def get_serializer_class(self):
         if self.request.version == '2':
             return ListCommentsPostSerializerV2
@@ -77,3 +87,13 @@ class ListCommentsPostViewSet(generics.ListAPIView):
     def get_queryset(self):
         post = Post.objects.get(pk=self.kwargs['pk'])
         return Comment.objects.filter(post=post)
+
+
+def create_with_location(self, request):
+    serializer = self.serializer_class(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        response = Response(serializer.data, status=status.HTTP_201_CREATED)
+        id = str(serializer.data['id'])
+        response['Location'] = request.build_absolute_uri() + id
+        return response
