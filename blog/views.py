@@ -104,3 +104,4 @@ def create_with_location(self, request):
         id = str(serializer.data['id'])
         response['Location'] = request.build_absolute_uri() + id
         return response
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
