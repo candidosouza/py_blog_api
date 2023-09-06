@@ -77,3 +77,6 @@ O Django Admin está disponível para gerenciamento avançado dos modelos. Os mo
 - PyJWT
 - Faker
 - django-filter
+- python-dotenv
+- dj-database-url
+- django-cors-headers
