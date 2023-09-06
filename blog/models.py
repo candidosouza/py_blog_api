@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db import models
 
+from common.utils import hashed_upload_to
+
 CREATED_AT = 'Criado em'
 UPDATED_AT = 'Atualizado em'
 
@@ -71,6 +73,12 @@ class Category(models.Model):
         verbose_name='Slug',
         validators=[MinLengthValidator(3), MaxLengthValidator(100)],
     )
+    image = models.ImageField(
+        upload_to=hashed_upload_to('category'),
+        verbose_name='Imagem',
+        blank=True,
+        null=True,
+    )
     is_active = models.BooleanField(default=True, verbose_name='Ativo')
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=CREATED_AT
@@ -109,6 +117,12 @@ class Post(models.Model):
     content = models.TextField(verbose_name='Conteúdo')
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, verbose_name='Categoria'
+    )
+    image = models.ImageField(
+        upload_to=hashed_upload_to('post'),
+        verbose_name='Imagem',
+        blank=True,
+        null=True,
     )
     published = models.BooleanField(default=True, verbose_name='Publicado')
     created_at = models.DateTimeField(
