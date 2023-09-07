@@ -55,7 +55,7 @@ A documentação da API está disponível em:
 
 - `/swagger/`
 - `/schema.json/`
-- `/redoc/`.
+- `/redoc/`
 
 ## Endpoints da API
 
