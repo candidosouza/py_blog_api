@@ -18,6 +18,7 @@ PyBlogAPI! Esta API REST com Django permite aos usuários gerenciar uma platafor
 - [Utilização](#utilização)
 - [Negociação de Conteúdo](#negociação-de-conteúdo)
 - [Autenticação](#autenticação)
+- [Documentação da API](#documentação-da-api)
 - [Endpoints da API](#endpoints-da-api)
   - [Categoria](#categoria)
   - [Post](#post)
