@@ -1,5 +1,11 @@
 # Descrição em andamento...
 
+usar: https://github.com/fabiocaccamo/django-admin-interface
+usar: Adicionar CAPTCHA ao formulário de login do Django, Para proteger contra ataques de força bruta
+analizar o uso: Fail2Ban 
+analizar o uso: django-axes
+analizar: django-admin-honeypot, aparentemente descontinuado
+
 # PyBlogAPI: Uma API RESTful de Blog com Django / Django Rest Framework
 
 ## Visão Geral
@@ -42,6 +48,14 @@ A autenticação é feita através de Basic Authentication. Você precisará de 
 
 - user: admin
 - password: admin
+
+## Documentação da API
+
+A documentação da API está disponível em:
+
+- `/swagger/`
+- `/schema.json/`
+- `/redoc/`.
 
 ## Endpoints da API
 
@@ -95,3 +109,4 @@ O Django Admin está disponível para gerenciamento avançado dos modelos. Os mo
 - django-cors-headers
 - django-redis
 - djangorestframework-xml
+- drf-yasg
