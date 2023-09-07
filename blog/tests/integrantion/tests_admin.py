@@ -32,16 +32,16 @@ class AdminIntegrationTest(TestCase):
         )
 
     def test_category_admin_page(self):
-        response = self.client.get('/admin/blog/category/')
+        response = self.client.get('/blog-platform-admin/blog/category/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Selecione Categoria para modificar')
 
     def test_post_admin_page(self):
-        response = self.client.get('/admin/blog/post/')
+        response = self.client.get('/blog-platform-admin/blog/post/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Selecione Post para modificar')
 
     def test_comment_admin_page(self):
-        response = self.client.get('/admin/blog/comment/')
+        response = self.client.get('/blog-platform-admin/blog/comment/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Selecione Comentário para modificar')

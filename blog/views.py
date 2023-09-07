@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
-from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics, status, viewsets
 from rest_framework.response import Response
-
 
 from blog.models import Category, Comment, Post
 from blog.serializers import (
@@ -27,7 +26,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
         return create_with_location(self, request)
 
 
-@method_decorator(cache_page(30), name='dispatch') # 30 seconds de cache para desenvolvimento
+@method_decorator(
+    cache_page(30), name='dispatch'
+)   # 30 seconds de cache para desenvolvimento
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
