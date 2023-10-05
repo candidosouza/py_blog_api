@@ -43,7 +43,7 @@ docker compose exec app bash
 
 Ative o ambiente virtual
 ```bash
-postry shell
+poetry shell
 ```
 
 Execute as migrações
