@@ -1,7 +1,3 @@
-# Descrição em andamento...
-
-
-
 # PyBlogAPI: Uma API RESTful de Blog com Django / Django Rest Framework
 
 ## Visão Geral
@@ -24,9 +20,57 @@ PyBlogAPI! Esta API REST com Django permite aos usuários gerenciar uma platafor
 
 ## Configuração e Instalação
 
-Em Andamento...
+Clone o projeto:
 
-...
+```bash
+git clone https://github.com/candidosouza/py_blog_api.git
+```
+
+Entre na pasta raiz do projeto
+```bash
+cd py_blog_api
+```
+
+Suba os contaneres
+```bash
+docker-compose up -d
+```
+
+Entre no container app
+```bash
+docker compose exec app bash
+```
+
+Ative o ambiente virtual
+```bash
+postry shell
+```
+
+Execute as migrações
+```bash
+python manage.py migrate
+```
+
+Rode as fistures
+```bash
+python manage.py seeds
+```
+
+Suba o servidor
+```bash
+python manage.py runserver 0.0.0.0:8000
+```
+
+acesse a url
+```bash
+http://localhost:8000/api/
+```
+
+usuário admin
+
+user: admin
+password: admin
+
 
 ## Utilização
 
